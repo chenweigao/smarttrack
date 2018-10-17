@@ -46,6 +46,11 @@
 
 			});
 	</script>
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+	</style>
 	<!-- Bootstrap Core CSS -->
 	<link href="/static/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 	<!-- Custom CSS -->
@@ -272,7 +277,7 @@
 							</div>
 							<div class="four-text">
 								<h3>监测人数</h3>
-								<h4> {[ count ]} </h4>
+								<h4 v-cloak> {[ count ]} </h4>
 							</div>
 
 						</div>
@@ -284,7 +289,7 @@
 							</div>
 							<div class="four-text">
 								<h3>历史记录</h3>
-								<h4>{[ history ]}</h4>
+								<h4 v-cloak>{[ history ]}</h4>
 
 							</div>
 
@@ -297,7 +302,7 @@
 							</div>
 							<div class="four-text">
 								<h3>路径个数</h3>
-								<h4>{[ path ]}</h4>
+								<h4 v-cloak>{[ path ]}</h4>
 							</div>
 
 						</div>
@@ -310,7 +315,7 @@
 
 							<div class="four-text">
 								<h3>警报次数</h3>
-								<h4>{[ alarm ]}</h4>
+								<h4 v-cloak>{[ alarm ]}</h4>
 
 							</div>
 						</div>

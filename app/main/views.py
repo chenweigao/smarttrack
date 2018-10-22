@@ -17,6 +17,10 @@ from functools import reduce
 import pymongo
 from app.filter import TracerList
 
+import json
+
+from flask import jsonify
+
 def get_raw_data(count, startdatetime=None):
     db_conn = pymongo.MongoClient()
     dev_names = [d['name'] for d in db_conn['identity']['devices'].find()]
@@ -98,9 +102,15 @@ def path():
         d.pop('_id')
         l.tracetarget(d)
 
-    return str([tl.targetlist for tl in l.tracerlist if len(tl.targetlist) > 1]).replace("'", '"').replace('datetime.datetime(', '"').replace(')', '"')
+    l=[tl.targetlist for tl in l.tracerlist if len(tl.targetlist) > 1]
+    for p in l:
+        for t in p:
+            t['time']=str(t['time'])
 
-    #return str([{'x':i['x'], 'y':i['y'], 'time':i['time']} for i in mongo.db.mycol.find()])
+    resp = jsonify(l)
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
+    # return json.dumps(l)
 
 @main.route('/video_feed', methods=['GET', 'POST'])
 def video_feed():
